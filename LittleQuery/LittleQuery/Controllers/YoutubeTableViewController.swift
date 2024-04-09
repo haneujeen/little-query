@@ -6,8 +6,37 @@
 //
 
 import UIKit
+import Alamofire
+import Kingfisher
 
 class YoutubeTableViewController: UITableViewController {
+    var videos: [Video]?
+    
+    func search(query: String?) {
+        guard let query else { return }
+        let endpoint = "https://www.googleapis.com/youtube/v3/search"
+        let params: Parameters = [
+            "part": "snippet",
+            "maxResults": 1,
+            "q": query,
+            "topicId": "/m/01k8wb",
+            "type": "video",
+            "videoCategoryId": 28,
+            "key": apiKey
+        ]
+        let alamo = AF.request(endpoint, method: .get, parameters: params)
+        
+        alamo.responseDecodable(of: YoutubeRoot.self) { response in
+            switch response.result {
+            case .success(let root):
+                self.videos = root.items
+                self.tableView.reloadData()
+                
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -17,6 +46,7 @@ class YoutubeTableViewController: UITableViewController {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        search(query: "boating%7Csailing -fishing")
     }
 
     // MARK: - Table view data source
@@ -28,20 +58,23 @@ class YoutubeTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 1
+        return videos?.count ?? 0
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "video", for: indexPath)
+        guard let video = videos?[indexPath.row] else { return cell }
 
         // Configure the cell...
         let thumbnailImage = cell.viewWithTag(1) as? UIImageView
-        let titleLabel = cell.viewWithTag(2) as? UILabel
-        let channelTitleLabel = cell.viewWithTag(3) as? UILabel
+        thumbnailImage?.kf.setImage(with: URL(string: video.snippet.thumbnails.medium.url))
         
-        titleLabel?.text = "The Insane Biology of: The Narwhal"
-        channelTitleLabel?.text = "Real Science"
+        let titleLabel = cell.viewWithTag(2) as? UILabel
+        titleLabel?.text = video.snippet.title
+
+        let channelTitleLabel = cell.viewWithTag(3) as? UILabel
+        channelTitleLabel?.text = video.snippet.channelTitle
 
         return cell
     }
