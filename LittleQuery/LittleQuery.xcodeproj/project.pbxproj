@@ -12,6 +12,14 @@
 		4E6695BD2BC36A9800515E68 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 4E6695BC2BC36A9800515E68 /* Base */; };
 		4E6695BF2BC36A9A00515E68 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4E6695BE2BC36A9A00515E68 /* Assets.xcassets */; };
 		4E6695C22BC36A9A00515E68 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 4E6695C12BC36A9A00515E68 /* Base */; };
+		4E6695CB2BC3B68900515E68 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6695CA2BC3B68900515E68 /* MainViewController.swift */; };
+		4E6695CD2BC3B71C00515E68 /* GoogleScholarTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6695CC2BC3B71C00515E68 /* GoogleScholarTableViewController.swift */; };
+		4E6695CF2BC3B77700515E68 /* YoutubeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6695CE2BC3B77700515E68 /* YoutubeTableViewController.swift */; };
+		4E6695D12BC3B7B900515E68 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6695D02BC3B7B900515E68 /* ChatViewController.swift */; };
+		4E6695D32BC3C21300515E68 /* GSDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6695D22BC3C21300515E68 /* GSDetailViewController.swift */; };
+		4E6695D52BC3CA5E00515E68 /* HistoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6695D42BC3CA5E00515E68 /* HistoryTableViewController.swift */; };
+		4E6695D72BC3D37500515E68 /* NotesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6695D62BC3D37500515E68 /* NotesTableViewController.swift */; };
+		4E6695D92BC3D3B900515E68 /* AddNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6695D82BC3D3B900515E68 /* AddNoteViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +30,14 @@
 		4E6695BE2BC36A9A00515E68 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4E6695C12BC36A9A00515E68 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4E6695C32BC36A9A00515E68 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4E6695CA2BC3B68900515E68 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		4E6695CC2BC3B71C00515E68 /* GoogleScholarTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleScholarTableViewController.swift; sourceTree = "<group>"; };
+		4E6695CE2BC3B77700515E68 /* YoutubeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YoutubeTableViewController.swift; sourceTree = "<group>"; };
+		4E6695D02BC3B7B900515E68 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		4E6695D22BC3C21300515E68 /* GSDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSDetailViewController.swift; sourceTree = "<group>"; };
+		4E6695D42BC3CA5E00515E68 /* HistoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTableViewController.swift; sourceTree = "<group>"; };
+		4E6695D62BC3D37500515E68 /* NotesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesTableViewController.swift; sourceTree = "<group>"; };
+		4E6695D82BC3D3B900515E68 /* AddNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNoteViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +70,7 @@
 		4E6695B42BC36A9800515E68 /* LittleQuery */ = {
 			isa = PBXGroup;
 			children = (
+				4E6695C92BC3B61B00515E68 /* Controllers */,
 				4E6695B52BC36A9800515E68 /* AppDelegate.swift */,
 				4E6695B72BC36A9800515E68 /* SceneDelegate.swift */,
 				4E6695BB2BC36A9800515E68 /* Main.storyboard */,
@@ -62,6 +79,21 @@
 				4E6695C32BC36A9A00515E68 /* Info.plist */,
 			);
 			path = LittleQuery;
+			sourceTree = "<group>";
+		};
+		4E6695C92BC3B61B00515E68 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				4E6695CA2BC3B68900515E68 /* MainViewController.swift */,
+				4E6695CC2BC3B71C00515E68 /* GoogleScholarTableViewController.swift */,
+				4E6695CE2BC3B77700515E68 /* YoutubeTableViewController.swift */,
+				4E6695D02BC3B7B900515E68 /* ChatViewController.swift */,
+				4E6695D22BC3C21300515E68 /* GSDetailViewController.swift */,
+				4E6695D42BC3CA5E00515E68 /* HistoryTableViewController.swift */,
+				4E6695D62BC3D37500515E68 /* NotesTableViewController.swift */,
+				4E6695D82BC3D3B900515E68 /* AddNoteViewController.swift */,
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -135,7 +167,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4E6695D52BC3CA5E00515E68 /* HistoryTableViewController.swift in Sources */,
+				4E6695CF2BC3B77700515E68 /* YoutubeTableViewController.swift in Sources */,
+				4E6695D72BC3D37500515E68 /* NotesTableViewController.swift in Sources */,
+				4E6695CB2BC3B68900515E68 /* MainViewController.swift in Sources */,
+				4E6695CD2BC3B71C00515E68 /* GoogleScholarTableViewController.swift in Sources */,
 				4E6695B62BC36A9800515E68 /* AppDelegate.swift in Sources */,
+				4E6695D32BC3C21300515E68 /* GSDetailViewController.swift in Sources */,
+				4E6695D12BC3B7B900515E68 /* ChatViewController.swift in Sources */,
+				4E6695D92BC3D3B900515E68 /* AddNoteViewController.swift in Sources */,
 				4E6695B82BC36A9800515E68 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
