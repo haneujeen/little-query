@@ -9,7 +9,6 @@ import Foundation
 
 struct ThumbnailSizes: Codable {
     let medium: Thumbnail
-    let high: Thumbnail
 }
 
 struct Thumbnail: Codable {
@@ -28,10 +27,11 @@ struct Id: Codable {
 }
 
 struct Video: Codable {
-    let snippet: Snippet
     let id: Id
+    let snippet: Snippet
 }
 
 struct YoutubeRoot: Codable {
+    let nextPageToken: String
     let items: [Video]
 }
