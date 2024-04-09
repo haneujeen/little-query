@@ -37,7 +37,6 @@ class GoogleScholarTableViewController: UITableViewController {
                 self.tableView.reloadData()
             }
         }.resume()
-        
     }
 
     override func viewDidLoad() {
@@ -65,14 +64,15 @@ class GoogleScholarTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "article", for: indexPath)
-
+        guard let article = results?[indexPath.row] else { return cell }
+        
         // Configure the cell...
         let titleLabel = cell.viewWithTag(1) as? UILabel
-        titleLabel?.text = results?[indexPath.row].title
+        titleLabel?.text = article.title
         let publicationLabel = cell.viewWithTag(2) as? UILabel
-        publicationLabel?.text = results?[indexPath.row].publication["summary"]
+        publicationLabel?.text = article.publication["summary"]
         let snippetLabel = cell.viewWithTag(3) as? UILabel
-        snippetLabel?.text = results?[indexPath.row].snippet
+        snippetLabel?.text = article.snippet
 
         return cell
     }
@@ -82,13 +82,18 @@ class GoogleScholarTableViewController: UITableViewController {
     }
 
     // MARK: - Navigation
-
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
         if segue.identifier == "articleSegue" {
             let controller = segue.destination as? GSDetailViewController
+            
+            guard let indexPath = tableView.indexPathForSelectedRow,
+                  let article = results?[indexPath.row] else { return }
+            
+            controller?.url  = URL(string: article.link)
         }
     }
 
