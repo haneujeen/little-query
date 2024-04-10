@@ -9,7 +9,11 @@ import UIKit
 
 class GoogleScholarTableViewController: UITableViewController {
     let apiKey = "3e0d360330ffda3410e04ebabbdcae1068124e880e5fcbb3b2c75ba385d4e0e7"
-    var results: [Article]?
+    var isFetching = false
+    var page = 0
+    var articles: [Article]?
+    
+    @IBOutlet weak var searchBar: UISearchBar!
     
     func buildRequest(query: String, page: Int, size: Int) -> URLRequest {
         let endpoint = "https://serpapi.com/search?engine=google_scholar&q=\(query)&hl=en&start=\(page)&api_key=\(apiKey)&num=\(size)"
@@ -22,16 +26,24 @@ class GoogleScholarTableViewController: UITableViewController {
     }
     
     func createTask(query: String?, page: Int, size: Int) {
-        guard let query else { return }
-        let request = buildRequest(query: query, page: page, size: size)
+        guard !isFetching, let query else { return }
+        let request = buildRequest(query: query, page: page * size, size: size)
         
+        isFetching = true
         URLSession.shared.dataTask(with: request) { data, response, error in
-            if let error { print(error.localizedDescription); return }
+            defer { self.isFetching = false }
             
+            if let error { print(error.localizedDescription); return }
             guard let data else { return }
             
             let root = try? JSONDecoder().decode(Root.self, from: data)
-            self.results = root?.results
+            guard let newArticles = root?.results else { return }
+            
+            if page == 0 {
+                    self.articles = newArticles
+            } else {
+                self.articles?.append(contentsOf: newArticles)
+            }
             
             DispatchQueue.main.async {
                 self.tableView.reloadData()
@@ -44,27 +56,20 @@ class GoogleScholarTableViewController: UITableViewController {
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
-        createTask(query: "biology", page: 0, size: 5)
     }
 
     // MARK: - Table view data source
-
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return results?.count ?? 0
+        return articles?.count ?? 0
     }
-
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "article", for: indexPath)
-        guard let article = results?[indexPath.row] else { return cell }
+        guard let article = articles?[indexPath.row] else { return cell }
         
         // Configure the cell...
         let titleLabel = cell.viewWithTag(1) as? UILabel
@@ -80,21 +85,28 @@ class GoogleScholarTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
             tableView.deselectRow(at: indexPath, animated: true)
     }
+    
+    // MARK: - UIScrollViewDelegate Implementation
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let position = scrollView.contentOffset.y
+        let tableViewContentSizeHeight = tableView.contentSize.height
+        let scrollViewHeight = scrollView.frame.size.height
+
+        if position > (tableViewContentSizeHeight - 100 - scrollViewHeight) && !isFetching {
+            page += 1
+        }
+    }
 
     // MARK: - Navigation
-    
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
         if segue.identifier == "articleSegue" {
             let controller = segue.destination as? GSDetailViewController
             
             guard let indexPath = tableView.indexPathForSelectedRow,
-                  let article = results?[indexPath.row] else { return }
+                  let article = articles?[indexPath.row] else { return }
             
             controller?.url  = URL(string: article.link)
         }
     }
-
 }
