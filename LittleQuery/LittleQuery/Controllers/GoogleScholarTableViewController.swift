@@ -35,14 +35,19 @@ class GoogleScholarTableViewController: UITableViewController {
             
             if let error { print(error.localizedDescription); return }
             guard let data else { return }
-            
-            let root = try? JSONDecoder().decode(Root.self, from: data)
-            guard let newArticles = root?.results else { return }
-            
-            if page == 0 {
+
+            do {
+                let root = try JSONDecoder().decode(Root.self, from: data)
+                let newArticles = root.results
+                
+                if page == 0 {
                     self.articles = newArticles
-            } else {
-                self.articles?.append(contentsOf: newArticles)
+                } else {
+                    self.articles?.append(contentsOf: newArticles)
+                }
+                
+            } catch {
+                print(error.localizedDescription)
             }
             
             DispatchQueue.main.async {
@@ -75,7 +80,7 @@ class GoogleScholarTableViewController: UITableViewController {
         let titleLabel = cell.viewWithTag(1) as? UILabel
         titleLabel?.text = article.title
         let publicationLabel = cell.viewWithTag(2) as? UILabel
-        publicationLabel?.text = article.publication["summary"]
+        publicationLabel?.text = article.publication.summary
         let snippetLabel = cell.viewWithTag(3) as? UILabel
         snippetLabel?.text = article.snippet
 

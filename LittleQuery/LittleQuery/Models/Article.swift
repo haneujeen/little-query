@@ -30,7 +30,7 @@ struct Article: Codable {
     let title: String
     let link: String
     let snippet: String
-    let publication: [String:String]
+    let publication: Publication
     
     enum CodingKeys: String, CodingKey {
         case index = "position"
@@ -39,6 +39,10 @@ struct Article: Codable {
         case snippet
         case publication = "publication_info"
     }
+}
+
+struct Publication: Codable {
+    let summary: String
 }
 
 struct Pagination: Codable {
@@ -54,3 +58,4 @@ struct Root: Codable {
         case pagination
     }
 }
+
