@@ -10,7 +10,13 @@ import UIKit
 class GoogleScholarTableViewController: UITableViewController {
     let apiKey = "3e0d360330ffda3410e04ebabbdcae1068124e880e5fcbb3b2c75ba385d4e0e7"
     var isFetching = false
-    var page = 0
+    var hasSearched = false
+    var page = 0 {
+        didSet {
+            guard let query = searchBar.text else { return }
+            createTask(query: query, page: page, size: 10)
+        }
+    }
     var articles: [Article]?
     
     @IBOutlet weak var searchBar: UISearchBar!
@@ -58,9 +64,7 @@ class GoogleScholarTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
+        searchBar.delegate = self
     }
 
     // MARK: - Table view data source
@@ -97,7 +101,7 @@ class GoogleScholarTableViewController: UITableViewController {
         let tableViewContentSizeHeight = tableView.contentSize.height
         let scrollViewHeight = scrollView.frame.size.height
 
-        if position > (tableViewContentSizeHeight - 100 - scrollViewHeight) && !isFetching {
+        if hasSearched && position > (tableViewContentSizeHeight - 100 - scrollViewHeight) && !isFetching {
             page += 1
         }
     }
@@ -113,5 +117,14 @@ class GoogleScholarTableViewController: UITableViewController {
             
             controller?.url  = URL(string: article.link)
         }
+    }
+}
+
+extension GoogleScholarTableViewController: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        hasSearched = true
+        isFetching = false
+        page = 0
+        searchBar.resignFirstResponder()
     }
 }
