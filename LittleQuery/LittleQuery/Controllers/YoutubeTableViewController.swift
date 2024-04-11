@@ -11,7 +11,10 @@ import Kingfisher
 
 class YoutubeTableViewController: UITableViewController {
     var videos: [Video]?
-    var page = 0 {
+    
+    var hasSearched = false
+    var pageToken: String?
+    var scrollCount = 0 {
         didSet {
             guard let query = searchBar.text else { return }
             search(query: query)
@@ -23,22 +26,31 @@ class YoutubeTableViewController: UITableViewController {
     func search(query: String?) {
         guard let query else { return }
         let endpoint = "https://www.googleapis.com/youtube/v3/search"
-        let params: Parameters = [
+        var params: Parameters = [
             "part": "snippet",
-            "maxResults": 1,
             "q": query,
+            "maxResults": 7,
             "topicId": "/m/01k8wb",
             "type": "video",
             "videoCategoryId": 28,
             "key": apiKey
         ]
+        
+        if let pageToken { params.updateValue(pageToken, forKey: "pageToken") }
+        
         let alamo = AF.request(endpoint, method: .get, parameters: params)
         
-        alamo.responseDecodable(of: YoutubeRoot.self) { response in
+        alamo.responseDecodable(of: YoutubeRoot.self) { [weak self] response in
             switch response.result {
             case .success(let root):
-                self.videos = root.items
-                self.tableView.reloadData()
+                if self?.scrollCount == 0 {
+                    self?.videos = root.items
+                } else {
+                    self?.videos?.append(contentsOf: root.items)
+                }
+                
+                self?.tableView.reloadData()
+                self?.pageToken = root.nextPageToken
                 
             case .failure(let error):
                 print(error.localizedDescription)
@@ -48,9 +60,7 @@ class YoutubeTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
+        searchBar.delegate = self
     }
 
     // MARK: - Table view data source
@@ -73,6 +83,7 @@ class YoutubeTableViewController: UITableViewController {
         // Configure the cell...
         let thumbnailImage = cell.viewWithTag(1) as? UIImageView
         thumbnailImage?.kf.setImage(with: URL(string: video.snippet.thumbnails.medium.url))
+        thumbnailImage?.contentMode = .scaleAspectFill
         
         let titleLabel = cell.viewWithTag(2) as? UILabel
         titleLabel?.text = video.snippet.title
@@ -81,6 +92,17 @@ class YoutubeTableViewController: UITableViewController {
         channelTitleLabel?.text = video.snippet.channelTitle
 
         return cell
+    }
+    
+    // MARK: - UIScrollViewDelegate Implementation
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let position = scrollView.contentOffset.y
+        let tableViewContentSizeHeight = tableView.contentSize.height
+        let scrollViewHeight = scrollView.frame.size.height
+
+        if hasSearched && position > (tableViewContentSizeHeight - 100 - scrollViewHeight) {
+            scrollCount += 1
+        }
     }
 
     /*
@@ -92,12 +114,12 @@ class YoutubeTableViewController: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
 }
 
 extension YoutubeTableViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        page = 0
+        hasSearched = true
+        scrollCount = 0
         searchBar.resignFirstResponder()
     }
 }
