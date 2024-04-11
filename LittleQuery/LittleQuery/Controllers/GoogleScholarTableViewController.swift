@@ -36,8 +36,8 @@ class GoogleScholarTableViewController: UITableViewController {
         let request = buildRequest(query: query, page: page * size, size: size)
         
         isFetching = true
-        URLSession.shared.dataTask(with: request) { data, response, error in
-            defer { self.isFetching = false }
+        URLSession.shared.dataTask(with: request) { [weak self] data, response, error in
+            defer { self?.isFetching = false }
             
             if let error { print(error.localizedDescription); return }
             guard let data else { return }
@@ -47,9 +47,9 @@ class GoogleScholarTableViewController: UITableViewController {
                 let newArticles = root.results
                 
                 if page == 0 {
-                    self.articles = newArticles
+                    self?.articles = newArticles
                 } else {
-                    self.articles?.append(contentsOf: newArticles)
+                    self?.articles?.append(contentsOf: newArticles)
                 }
                 
             } catch {
@@ -57,7 +57,7 @@ class GoogleScholarTableViewController: UITableViewController {
             }
             
             DispatchQueue.main.async {
-                self.tableView.reloadData()
+                self?.tableView.reloadData()
             }
         }.resume()
     }
