@@ -156,7 +156,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="Xhx-9C-JDt" kind="presentation" id="c7x-3S-jar"/>
+                                    <segue destination="Xhx-9C-JDt" kind="presentation" identifier="videoSegue" id="c7x-3S-jar"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -235,20 +235,36 @@
             </objects>
             <point key="canvasLocation" x="-1121.3740458015266" y="2723.9436619718313"/>
         </scene>
-        <!--View Controller-->
+        <!--You Tube Player View Controller-->
         <scene sceneID="7cg-nb-Zfu">
             <objects>
-                <viewController id="Xhx-9C-JDt" sceneMemberID="viewController">
+                <viewController id="Xhx-9C-JDt" customClass="YouTubePlayerViewController" customModule="LittleQuery" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="fAA-G1-8S2">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="U9n-GE-pjE" customClass="YTPlayerView">
+                                <rect key="frame" x="16" y="291" width="361" height="260"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="15"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="7v8-j6-dol"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" systemColor="systemGray6Color"/>
                     </view>
+                    <connections>
+                        <outlet property="playerView" destination="U9n-GE-pjE" id="Xrb-sA-cEt"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="83H-1Y-iZw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-292" y="2724"/>
+            <point key="canvasLocation" x="-292.36641221374043" y="2723.9436619718313"/>
         </scene>
         <!--Main View Controller-->
         <scene sceneID="66Y-Mn-Rgl">
@@ -531,6 +547,9 @@
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray6Color">
+            <color red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemYellowColor">
             <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

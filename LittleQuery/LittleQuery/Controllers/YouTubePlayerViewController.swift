@@ -6,16 +6,20 @@
 //
 
 import UIKit
+import YouTubeiOSPlayerHelper
 
 class YouTubePlayerViewController: UIViewController {
-
+    var videoId: String?
+    @IBOutlet weak var playerView: YTPlayerView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        guard let videoId else { return }
+        playerView.load(withVideoId: videoId)
     }
     
-
     /*
     // MARK: - Navigation
 
