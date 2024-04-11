@@ -111,10 +111,10 @@
             </objects>
             <point key="canvasLocation" x="-1116.793893129771" y="1991.549295774648"/>
         </scene>
-        <!--Youtube Table View Controller-->
+        <!--You Tube Table View Controller-->
         <scene sceneID="G1H-Iz-pXX">
             <objects>
-                <tableViewController id="3Zg-n9-eMS" customClass="YoutubeTableViewController" customModule="LittleQuery" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="3Zg-n9-eMS" customClass="YouTubeTableViewController" customModule="LittleQuery" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="150" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="HhM-Q1-A5z">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

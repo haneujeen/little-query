@@ -14,7 +14,7 @@
 		4E6695C22BC36A9A00515E68 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 4E6695C12BC36A9A00515E68 /* Base */; };
 		4E6695CB2BC3B68900515E68 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6695CA2BC3B68900515E68 /* MainViewController.swift */; };
 		4E6695CD2BC3B71C00515E68 /* GoogleScholarTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6695CC2BC3B71C00515E68 /* GoogleScholarTableViewController.swift */; };
-		4E6695CF2BC3B77700515E68 /* YoutubeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6695CE2BC3B77700515E68 /* YoutubeTableViewController.swift */; };
+		4E6695CF2BC3B77700515E68 /* YouTubeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6695CE2BC3B77700515E68 /* YouTubeTableViewController.swift */; };
 		4E6695D12BC3B7B900515E68 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6695D02BC3B7B900515E68 /* ChatViewController.swift */; };
 		4E6695D32BC3C21300515E68 /* GSDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6695D22BC3C21300515E68 /* GSDetailViewController.swift */; };
 		4E6695D52BC3CA5E00515E68 /* HistoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6695D42BC3CA5E00515E68 /* HistoryTableViewController.swift */; };
@@ -25,6 +25,8 @@
 		4E6695E12BC522D100515E68 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 4E6695E02BC522D100515E68 /* Alamofire */; };
 		4E6695E32BC522D100515E68 /* AlamofireDynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 4E6695E22BC522D100515E68 /* AlamofireDynamic */; };
 		4E6695E62BC522DB00515E68 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 4E6695E52BC522DB00515E68 /* Kingfisher */; };
+		4E6695E92BC7D25B00515E68 /* YouTubeiOSPlayerHelper in Frameworks */ = {isa = PBXBuildFile; productRef = 4E6695E82BC7D25B00515E68 /* YouTubeiOSPlayerHelper */; };
+		4E6695EB2BC7D2D400515E68 /* YouTubePlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6695EA2BC7D2D400515E68 /* YouTubePlayerViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,7 +39,7 @@
 		4E6695C32BC36A9A00515E68 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4E6695CA2BC3B68900515E68 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		4E6695CC2BC3B71C00515E68 /* GoogleScholarTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleScholarTableViewController.swift; sourceTree = "<group>"; };
-		4E6695CE2BC3B77700515E68 /* YoutubeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YoutubeTableViewController.swift; sourceTree = "<group>"; };
+		4E6695CE2BC3B77700515E68 /* YouTubeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouTubeTableViewController.swift; sourceTree = "<group>"; };
 		4E6695D02BC3B7B900515E68 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		4E6695D22BC3C21300515E68 /* GSDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GSDetailViewController.swift; sourceTree = "<group>"; };
 		4E6695D42BC3CA5E00515E68 /* HistoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTableViewController.swift; sourceTree = "<group>"; };
@@ -45,6 +47,7 @@
 		4E6695D82BC3D3B900515E68 /* AddNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNoteViewController.swift; sourceTree = "<group>"; };
 		4E6695DB2BC4C39600515E68 /* Article.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Article.swift; sourceTree = "<group>"; };
 		4E6695DD2BC51EB400515E68 /* Video.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
+		4E6695EA2BC7D2D400515E68 /* YouTubePlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouTubePlayerViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +58,7 @@
 				4E6695E62BC522DB00515E68 /* Kingfisher in Frameworks */,
 				4E6695E12BC522D100515E68 /* Alamofire in Frameworks */,
 				4E6695E32BC522D100515E68 /* AlamofireDynamic in Frameworks */,
+				4E6695E92BC7D25B00515E68 /* YouTubeiOSPlayerHelper in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -97,12 +101,13 @@
 			children = (
 				4E6695CA2BC3B68900515E68 /* MainViewController.swift */,
 				4E6695CC2BC3B71C00515E68 /* GoogleScholarTableViewController.swift */,
-				4E6695CE2BC3B77700515E68 /* YoutubeTableViewController.swift */,
+				4E6695CE2BC3B77700515E68 /* YouTubeTableViewController.swift */,
 				4E6695D02BC3B7B900515E68 /* ChatViewController.swift */,
 				4E6695D22BC3C21300515E68 /* GSDetailViewController.swift */,
 				4E6695D42BC3CA5E00515E68 /* HistoryTableViewController.swift */,
 				4E6695D62BC3D37500515E68 /* NotesTableViewController.swift */,
 				4E6695D82BC3D3B900515E68 /* AddNoteViewController.swift */,
+				4E6695EA2BC7D2D400515E68 /* YouTubePlayerViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -136,6 +141,7 @@
 				4E6695E02BC522D100515E68 /* Alamofire */,
 				4E6695E22BC522D100515E68 /* AlamofireDynamic */,
 				4E6695E52BC522DB00515E68 /* Kingfisher */,
+				4E6695E82BC7D25B00515E68 /* YouTubeiOSPlayerHelper */,
 			);
 			productName = LittleQuery;
 			productReference = 4E6695B22BC36A9800515E68 /* LittleQuery.app */;
@@ -168,6 +174,7 @@
 			packageReferences = (
 				4E6695DF2BC522D100515E68 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				4E6695E42BC522DB00515E68 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				4E6695E72BC7D25B00515E68 /* XCRemoteSwiftPackageReference "youtube-ios-player-helper" */,
 			);
 			productRefGroup = 4E6695B32BC36A9800515E68 /* Products */;
 			projectDirPath = "";
@@ -199,7 +206,7 @@
 				4E6695DC2BC4C39600515E68 /* Article.swift in Sources */,
 				4E6695DE2BC51EB400515E68 /* Video.swift in Sources */,
 				4E6695D52BC3CA5E00515E68 /* HistoryTableViewController.swift in Sources */,
-				4E6695CF2BC3B77700515E68 /* YoutubeTableViewController.swift in Sources */,
+				4E6695CF2BC3B77700515E68 /* YouTubeTableViewController.swift in Sources */,
 				4E6695D72BC3D37500515E68 /* NotesTableViewController.swift in Sources */,
 				4E6695CB2BC3B68900515E68 /* MainViewController.swift in Sources */,
 				4E6695CD2BC3B71C00515E68 /* GoogleScholarTableViewController.swift in Sources */,
@@ -208,6 +215,7 @@
 				4E6695D12BC3B7B900515E68 /* ChatViewController.swift in Sources */,
 				4E6695D92BC3D3B900515E68 /* AddNoteViewController.swift in Sources */,
 				4E6695B82BC36A9800515E68 /* SceneDelegate.swift in Sources */,
+				4E6695EB2BC7D2D400515E68 /* YouTubePlayerViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -448,6 +456,14 @@
 				minimumVersion = 7.11.0;
 			};
 		};
+		4E6695E72BC7D25B00515E68 /* XCRemoteSwiftPackageReference "youtube-ios-player-helper" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/youtube/youtube-ios-player-helper";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.4;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -465,6 +481,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 4E6695E42BC522DB00515E68 /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
+		};
+		4E6695E82BC7D25B00515E68 /* YouTubeiOSPlayerHelper */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 4E6695E72BC7D25B00515E68 /* XCRemoteSwiftPackageReference "youtube-ios-player-helper" */;
+			productName = YouTubeiOSPlayerHelper;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
