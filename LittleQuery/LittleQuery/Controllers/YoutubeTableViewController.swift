@@ -11,6 +11,14 @@ import Kingfisher
 
 class YoutubeTableViewController: UITableViewController {
     var videos: [Video]?
+    var page = 0 {
+        didSet {
+            guard let query = searchBar.text else { return }
+            search(query: query)
+        }
+    }
+    
+    @IBOutlet weak var searchBar: UISearchBar!
     
     func search(query: String?) {
         guard let query else { return }
@@ -43,10 +51,6 @@ class YoutubeTableViewController: UITableViewController {
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
-        search(query: "boating|sailing -fishing")
     }
 
     // MARK: - Table view data source
@@ -89,4 +93,11 @@ class YoutubeTableViewController: UITableViewController {
     }
     */
 
+}
+
+extension YoutubeTableViewController: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        page = 0
+        searchBar.resignFirstResponder()
+    }
 }
