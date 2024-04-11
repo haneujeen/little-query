@@ -32,6 +32,6 @@ struct Video: Codable {
 }
 
 struct YoutubeRoot: Codable {
-    let nextPageToken: String
+    let nextPageToken: String?
     let items: [Video]
 }
