@@ -12,8 +12,9 @@ import Kingfisher
 class YoutubeTableViewController: UITableViewController {
     var videos: [Video]?
     
+    var isFetching = false
     var hasSearched = false
-    var pageToken: String?
+    var nextPageToken: String?
     var scrollCount = 0 {
         didSet {
             guard let query = searchBar.text else { return }
@@ -24,7 +25,10 @@ class YoutubeTableViewController: UITableViewController {
     @IBOutlet weak var searchBar: UISearchBar!
     
     func search(query: String?) {
-        guard let query else { return }
+        guard !isFetching, let query else { return }
+        
+        isFetching = true
+        
         let endpoint = "https://www.googleapis.com/youtube/v3/search"
         var params: Parameters = [
             "part": "snippet",
@@ -36,21 +40,24 @@ class YoutubeTableViewController: UITableViewController {
             "key": apiKey
         ]
         
-        if let pageToken { params.updateValue(pageToken, forKey: "pageToken") }
+        if let nextPageToken { params.updateValue(nextPageToken, forKey: "pageToken") }
         
         let alamo = AF.request(endpoint, method: .get, parameters: params)
         
         alamo.responseDecodable(of: YoutubeRoot.self) { [weak self] response in
+            defer { self?.isFetching = false }
+            
             switch response.result {
             case .success(let root):
                 if self?.scrollCount == 0 {
                     self?.videos = root.items
                 } else {
                     self?.videos?.append(contentsOf: root.items)
+                    // Consider implementing the efficient row insertion here
                 }
                 
                 self?.tableView.reloadData()
-                self?.pageToken = root.nextPageToken
+                self?.nextPageToken = root.nextPageToken
                 
             case .failure(let error):
                 print(error.localizedDescription)
@@ -100,7 +107,7 @@ class YoutubeTableViewController: UITableViewController {
         let tableViewContentSizeHeight = tableView.contentSize.height
         let scrollViewHeight = scrollView.frame.size.height
 
-        if hasSearched && position > (tableViewContentSizeHeight - 100 - scrollViewHeight) {
+        if hasSearched && position > (tableViewContentSizeHeight - 100 - scrollViewHeight) && !isFetching {
             scrollCount += 1
         }
     }
@@ -118,6 +125,7 @@ class YoutubeTableViewController: UITableViewController {
 
 extension YoutubeTableViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        isFetching = false
         hasSearched = true
         scrollCount = 0
         searchBar.resignFirstResponder()
