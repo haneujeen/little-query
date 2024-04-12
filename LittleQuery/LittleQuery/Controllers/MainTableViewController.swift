@@ -8,12 +8,20 @@
 import UIKit
 
 class MainTableViewController: UITableViewController {
-
+    var query: String?
+    
+    @IBOutlet weak var searchBar: UISearchBar!
+    var searchDebounceTimer: Timer?
+    
+    // Flags
+    var isFetching = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
+        searchBar.delegate = self
     }
     
     @IBAction func buttonTapped(_ sender: UIButton) {
@@ -75,4 +83,19 @@ class MainTableViewController: UITableViewController {
     }
     */
 
+}
+
+extension MainTableViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        searchDebounceTimer?.invalidate()
+        searchDebounceTimer = Timer.scheduledTimer(withTimeInterval: 1, repeats: false, block: { [weak self] _ in
+            self?.query = searchText
+            print(self?.query)
+        })
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.text = ""
+        searchBar.resignFirstResponder()
+    }
 }
