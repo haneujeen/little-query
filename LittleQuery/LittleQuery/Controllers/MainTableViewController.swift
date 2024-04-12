@@ -9,12 +9,15 @@ import UIKit
 
 class MainTableViewController: UITableViewController {
     var query: String?
-    
+    var engines = ["Google Scholar", "YouTube", "ChatGPT"]
     @IBOutlet weak var searchBar: UISearchBar!
     var searchDebounceTimer: Timer?
     
     // Flags
     var isFetching = false
+    
+    // Mini tables
+    var miniTableManagers: [Int: MiniTableManager] = [:]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,13 +57,28 @@ class MainTableViewController: UITableViewController {
         switch indexPath.row {
         case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: "chat", for: indexPath)
-            cell.backgroundColor = UIColor.systemPink
+            let engineLabel = cell.viewWithTag(1) as? UILabel
+            engineLabel?.text = engines[indexPath.row]
+            
+            let promptLabel = cell.viewWithTag(2) as? UILabel
             return cell
             
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: "default", for: indexPath)
-            cell.backgroundColor = UIColor.green
             // Default configuration
+            let engineLabel = cell.viewWithTag(1) as? UILabel
+            engineLabel?.text = engines[indexPath.row]
+                
+            let miniTable = cell.viewWithTag(3) as? UITableView
+            
+            let manager = miniTableManagers[indexPath.row] ?? MiniTableManager()
+            miniTableManagers[indexPath.row] = manager
+            
+            miniTable?.delegate = manager
+            miniTable?.dataSource = manager
+            miniTable?.register(UITableViewCell.self, forCellReuseIdentifier: "mini")
+            miniTable?.reloadData()
+            
             return cell
         }
     }

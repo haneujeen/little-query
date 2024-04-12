@@ -28,6 +28,7 @@
 		4E6695EB2BC7D2D400515E68 /* YouTubePlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6695EA2BC7D2D400515E68 /* YouTubePlayerViewController.swift */; };
 		4EA4FDBA2BC8D9E5000A9A92 /* MainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA4FDB92BC8D9E5000A9A92 /* MainTableViewController.swift */; };
 		4EA4FDBC2BC8D9F5000A9A92 /* MainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA4FDBB2BC8D9F5000A9A92 /* MainTableViewCell.swift */; };
+		4EA4FDE22BC9231C000A9A92 /* MiniTableManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA4FDE12BC9231B000A9A92 /* MiniTableManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +51,7 @@
 		4E6695EA2BC7D2D400515E68 /* YouTubePlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouTubePlayerViewController.swift; sourceTree = "<group>"; };
 		4EA4FDB92BC8D9E5000A9A92 /* MainTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewController.swift; sourceTree = "<group>"; };
 		4EA4FDBB2BC8D9F5000A9A92 /* MainTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewCell.swift; sourceTree = "<group>"; };
+		4EA4FDE12BC9231B000A9A92 /* MiniTableManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniTableManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +113,7 @@
 				4E6695EA2BC7D2D400515E68 /* YouTubePlayerViewController.swift */,
 				4EA4FDB92BC8D9E5000A9A92 /* MainTableViewController.swift */,
 				4EA4FDBB2BC8D9F5000A9A92 /* MainTableViewCell.swift */,
+				4EA4FDE12BC9231B000A9A92 /* MiniTableManager.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -213,6 +216,7 @@
 				4EA4FDBC2BC8D9F5000A9A92 /* MainTableViewCell.swift in Sources */,
 				4E6695D72BC3D37500515E68 /* NotesTableViewController.swift in Sources */,
 				4EA4FDBA2BC8D9E5000A9A92 /* MainTableViewController.swift in Sources */,
+				4EA4FDE22BC9231C000A9A92 /* MiniTableManager.swift in Sources */,
 				4E6695CD2BC3B71C00515E68 /* GoogleScholarTableViewController.swift in Sources */,
 				4E6695B62BC36A9800515E68 /* AppDelegate.swift in Sources */,
 				4E6695D32BC3C21300515E68 /* GSDetailViewController.swift in Sources */,
