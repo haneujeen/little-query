@@ -57,6 +57,7 @@ class MainTableViewController: UITableViewController {
         switch indexPath.row {
         case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: "chat", for: indexPath)
+            cell.selectionStyle = .none
             let engineLabel = cell.viewWithTag(1) as? UILabel
             engineLabel?.text = engines[indexPath.row]
             
@@ -65,6 +66,7 @@ class MainTableViewController: UITableViewController {
             
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: "default", for: indexPath)
+            cell.selectionStyle = .none
             // Default configuration
             let engineLabel = cell.viewWithTag(1) as? UILabel
             engineLabel?.text = engines[indexPath.row]
@@ -112,8 +114,7 @@ extension MainTableViewController: UISearchBarDelegate {
         })
     }
     
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.text = ""
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
     }
 }

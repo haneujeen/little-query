@@ -103,6 +103,9 @@
 		4E6695C92BC3B61B00515E68 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				4EA4FDB92BC8D9E5000A9A92 /* MainTableViewController.swift */,
+				4EA4FDBB2BC8D9F5000A9A92 /* MainTableViewCell.swift */,
+				4EA4FDE12BC9231B000A9A92 /* MiniTableManager.swift */,
 				4E6695CC2BC3B71C00515E68 /* GoogleScholarTableViewController.swift */,
 				4E6695CE2BC3B77700515E68 /* YouTubeTableViewController.swift */,
 				4E6695D02BC3B7B900515E68 /* ChatViewController.swift */,
@@ -111,9 +114,6 @@
 				4E6695D62BC3D37500515E68 /* NotesTableViewController.swift */,
 				4E6695D82BC3D3B900515E68 /* AddNoteViewController.swift */,
 				4E6695EA2BC7D2D400515E68 /* YouTubePlayerViewController.swift */,
-				4EA4FDB92BC8D9E5000A9A92 /* MainTableViewController.swift */,
-				4EA4FDBB2BC8D9F5000A9A92 /* MainTableViewCell.swift */,
-				4EA4FDE12BC9231B000A9A92 /* MiniTableManager.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
