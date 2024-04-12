@@ -9,11 +9,15 @@ import UIKit
 
 class GoogleScholarTableViewController: UITableViewController {
     let apiKey = "3e0d360330ffda3410e04ebabbdcae1068124e880e5fcbb3b2c75ba385d4e0e7"
+    var query: String?
     var isFetching = false
     var hasSearched = false
     var page = 0 {
         didSet {
-            guard let query = searchBar.text else { return }
+            // If query is nil but page has been updated (search bar triggered)
+            
+            // If query has value (has been sent from main)
+            
             createTask(query: query, page: page, size: 10)
         }
     }
