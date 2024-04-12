@@ -37,7 +37,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="1rl-yg-Yb3" kind="relationship" relationship="rootViewController" id="WIg-tb-WEA"/>
+                        <segue destination="2jx-xf-8gr" kind="relationship" relationship="rootViewController" id="Pt7-Um-i2r"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3TK-ee-kwi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -172,7 +172,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UOT-me-Hn8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-292" y="1992"/>
+            <point key="canvasLocation" x="-332" y="1992"/>
         </scene>
         <!--Chat View Controller-->
         <scene sceneID="Msu-aY-fS9">
@@ -266,58 +266,68 @@
             </objects>
             <point key="canvasLocation" x="-292.36641221374043" y="2723.9436619718313"/>
         </scene>
-        <!--Main View Controller-->
-        <scene sceneID="66Y-Mn-Rgl">
+        <!--Main Table View Controller-->
+        <scene sceneID="xEr-cD-s4S">
             <objects>
-                <viewController id="1rl-yg-Yb3" customClass="MainViewController" customModule="LittleQuery" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="WHe-EZ-AOG">
+                <tableViewController id="2jx-xf-8gr" customClass="MainTableViewController" customModule="LittleQuery" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="200" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="4MD-gJ-JOU">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <searchBar contentMode="redraw" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Khh-f5-5XA">
-                                <rect key="frame" x="0.0" y="241" width="393" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <outlet property="delegate" destination="1rl-yg-Yb3" id="Rwz-GB-KXz"/>
-                                </connections>
-                            </searchBar>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SqP-wr-Jcb">
-                                <rect key="frame" x="28" y="592" width="79" height="75"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="tinted" title="Google"/>
-                                <connections>
-                                    <segue destination="8bm-gq-yKD" kind="show" id="Hje-5W-iMJ"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KLX-51-w3h">
-                                <rect key="frame" x="284" y="592" width="81" height="75"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="tinted" title="OpenAI"/>
-                                <connections>
-                                    <segue destination="L0W-7d-CL6" kind="show" id="qnK-ar-AKr"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xnx-CT-iTu">
-                                <rect key="frame" x="152" y="592" width="89" height="75"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="tinted" title="YouTube"/>
-                                <connections>
-                                    <segue destination="3Zg-n9-eMS" kind="show" id="2tb-aK-Y8n"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="jtg-pg-U8K"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="D9u-L7-GS6"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="5DB-fO-AjM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" id="Khh-f5-5XA">
+                            <rect key="frame" x="0.0" y="0.0" width="393" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </searchBar>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="default" rowHeight="210" id="Fda-b2-hcL" customClass="MainTableViewCell" customModule="LittleQuery" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="94" width="393" height="210"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Fda-b2-hcL" id="MCE-Er-hSO">
+                                    <rect key="frame" x="0.0" y="0.0" width="393" height="210"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3gj-FY-g10">
+                                            <rect key="frame" x="298" y="158" width="75" height="35"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" title="Button"/>
+                                            <buttonConfiguration key="configuration" style="filled" title="Button"/>
+                                            <connections>
+                                                <action selector="buttonTapped:" destination="2jx-xf-8gr" eventType="touchUpInside" id="Qir-I0-rZg"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="button" destination="3gj-FY-g10" id="tHM-Qt-geA"/>
+                                </connections>
+                            </tableViewCell>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="chat" rowHeight="150" id="KvU-vD-ks2" customClass="MainTableViewCell" customModule="LittleQuery" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="304" width="393" height="150"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="KvU-vD-ks2" id="8qY-bN-CLQ">
+                                    <rect key="frame" x="0.0" y="0.0" width="393" height="150"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="L0W-7d-CL6" kind="show" identifier="toChat" id="ap8-eq-rCA"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="2jx-xf-8gr" id="tnP-aN-AD9"/>
+                            <outlet property="delegate" destination="2jx-xf-8gr" id="7xz-a9-Ix1"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="tEh-Ak-Fxa"/>
+                    <connections>
+                        <segue destination="8bm-gq-yKD" kind="show" identifier="toGoogleScholar" id="DnD-h6-5hI"/>
+                        <segue destination="3Zg-n9-eMS" kind="show" identifier="toYoutube" id="ff7-fz-CxD"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nyg-tE-vJm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-292.36641221374043" y="1201.4084507042255"/>
+            <point key="canvasLocation" x="-292" y="1201"/>
         </scene>
         <!--Item-->
         <scene sceneID="adC-9v-qSH">
