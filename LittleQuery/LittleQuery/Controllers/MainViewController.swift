@@ -69,8 +69,13 @@ class MainViewController: UIViewController {
             destination.videos = videos
             destination.pageToken = pageToken
             destination.tableView.reloadData()
-        } else {
             
+        } else { // segue.identifier == "toChat"
+            guard let destination = segue.destination as? ChatViewController else { return }
+            if let initialQuestion = suggestedQuestion {
+                destination.messages.append(Message(role: "user", content: initialQuestion))
+                destination.messageCount += 2
+            }
         }
     }
 
@@ -141,13 +146,14 @@ extension MainViewController: UISearchBarDelegate {
             "Authorization": "Bearer ",
             "Content-Type": "application/json"
         ]
+        
         let chatParams: Parameters = [
             "model": "gpt-3.5-turbo",
             "messages": [
                 [
                 "role": "system",
                 "content": """
-                    You are a biology research assistant. Generate a prompts or suggestions for possible study tasks user might want to accomplish regarding their query.
+                    You are a biology research assistant. Suggest a prompts for possible study tasks user might want to accomplish regarding their query. Suggest random prompt for biology research if it's not possible to find relevant study tasks.
                     Begin each prompt with a broad task or goal, followed by a more specific action or aspect of the main task. This initial prompts will give users a quick understanding of a complex task that can be handled through the platform.
                     Generate an initial question based on that initial prompt that guides the user further. Construct a JSON object with prompt
                      and question in the following format:

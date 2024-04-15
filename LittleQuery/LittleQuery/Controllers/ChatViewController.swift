@@ -8,14 +8,18 @@
 import UIKit
 
 class ChatViewController: UIViewController {
-    var messages: [Message] = [Message(role: "system", content: "You are a biology research assistant.")]
+    var messages: [Message] = [Message(role: "system", content: "You are a biology research assistant. Please provide concise responses, between 1 to 3 sentences.")]
+    var messageCount = 0 {
+        didSet {
+            sendMessage()
+        }
+    }
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var textView: UITextView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         // Do any additional setup after loading the view.
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 44
@@ -30,17 +34,6 @@ class ChatViewController: UIViewController {
             //tableView.scrollToRow(at: IndexPath(row: messages.count - 1, section: 0), at: .bottom, animated: true)
         }
     }
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
-    
 }
 
 extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
