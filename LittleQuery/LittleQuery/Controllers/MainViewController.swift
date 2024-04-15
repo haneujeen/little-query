@@ -28,6 +28,11 @@ class MainViewController: UIViewController {
     @IBOutlet weak var GSMiniTable: UITableView!
     @IBOutlet weak var youtubeMiniTable: UITableView!
     
+    // OpenAI API...
+    var suggestedQuestion: String?
+    @IBOutlet weak var taskLabel: UILabel!
+    @IBOutlet weak var actionLabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         searchBar.delegate = self
@@ -77,22 +82,22 @@ extension MainViewController: UISearchBarDelegate {
         
         searchDebounceTimer?.invalidate()
         searchDebounceTimer = Timer.scheduledTimer(withTimeInterval: 3, repeats: false, block: { [weak self] _ in
-            self?.search(query: searchText)
-            
+            self?.fetchPreviews(query: searchText)
         })
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchDebounceTimer?.invalidate()
-        self.search(query: searchBar.text)
+        self.fetchPreviews(query: searchBar.text)
         searchBar.resignFirstResponder()
     }
     
-    func search(query: String?) {
+    func fetchPreviews(query: String?) {
         guard !isFetching, let query else { return }
         isFetching = true
         let group = DispatchGroup()
         
+        // MARK: -
         let googleScholarEndpoint = "https://serpapi.com/search?engine=google_scholar"
         let googleScholarParams: Parameters = ["q": query, "start": 0, "num": 10, "api_key": SerpApiKey]
         
@@ -109,6 +114,7 @@ extension MainViewController: UISearchBarDelegate {
             }
         }
         
+        // MARK: -
         let youtubeEndpoint = "https://www.googleapis.com/youtube/v3/search"
         let youtubeParams: Parameters = [
             "part": "snippet", "q": query, "maxResults": 7,
@@ -129,10 +135,61 @@ extension MainViewController: UISearchBarDelegate {
             }
         }
         
+        // MARK: -
+        let chatEndpoint = "https://api.openai.com/v1/chat/completions"
+        let chatHeaders: HTTPHeaders = [
+            "Authorization": "Bearer ",
+            "Content-Type": "application/json"
+        ]
+        let chatParams: Parameters = [
+            "model": "gpt-3.5-turbo",
+            "messages": [
+                [
+                "role": "system",
+                "content": """
+                    You are a biology research assistant. Generate a prompts or suggestions for possible study tasks user might want to accomplish regarding their query.
+                    Begin each prompt with a broad task or goal, followed by a more specific action or aspect of the main task. This initial prompts will give users a quick understanding of a complex task that can be handled through the platform.
+                    Generate an initial question based on that initial prompt that guides the user further. Construct a JSON object with prompt
+                     and question in the following format:
+                    {
+                        "prompt": {"task": "Some broad task", "action": "Specific action or aspect"},
+                        "question": "What initial question would guide the user?"
+                    }
+                """
+                ],
+                ["role": "user","content": query]
+            ]
+        ]
+        
+        group.enter()
+        AF.request(
+            chatEndpoint,
+            method: .post,
+            parameters: chatParams,
+            encoding: JSONEncoding.default,
+            headers: chatHeaders
+        ).responseDecodable(of: ChatRoot.self) { response in
+            defer { group.leave() }
+            switch response.result {
+            case .success(let root):
+                guard let content = root.choices.first?.message.content,
+                      let contentData = content.data(using: .utf8),
+                      let initialContent = try? JSONDecoder().decode(InitialContent.self, from: contentData)
+                else { return }
+                
+                self.taskLabel.text = initialContent.prompt.task
+                self.actionLabel.text = initialContent.prompt.action
+                self.suggestedQuestion = initialContent.question
+                print(self.suggestedQuestion)
+                
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+        
         group.notify(queue: .main) {
             self.isFetching = false
             // Handle completion of all requests here
-            print("All requests completed.")
         }
     }
 
