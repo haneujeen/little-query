@@ -28,6 +28,7 @@
 		4E6695EB2BC7D2D400515E68 /* YouTubePlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6695EA2BC7D2D400515E68 /* YouTubePlayerViewController.swift */; };
 		4EA4FDBA2BC8D9E5000A9A92 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA4FDB92BC8D9E5000A9A92 /* MainViewController.swift */; };
 		4EA4FDE22BC9231C000A9A92 /* MiniTableManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA4FDE12BC9231B000A9A92 /* MiniTableManager.swift */; };
+		4EA4FDE42BCCB984000A9A92 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EA4FDE32BCCB984000A9A92 /* Message.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +51,7 @@
 		4E6695EA2BC7D2D400515E68 /* YouTubePlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouTubePlayerViewController.swift; sourceTree = "<group>"; };
 		4EA4FDB92BC8D9E5000A9A92 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		4EA4FDE12BC9231B000A9A92 /* MiniTableManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniTableManager.swift; sourceTree = "<group>"; };
+		4EA4FDE32BCCB984000A9A92 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +122,7 @@
 			children = (
 				4E6695DB2BC4C39600515E68 /* Article.swift */,
 				4E6695DD2BC51EB400515E68 /* Video.swift */,
+				4EA4FDE32BCCB984000A9A92 /* Message.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -218,6 +221,7 @@
 				4E6695D32BC3C21300515E68 /* GSDetailViewController.swift in Sources */,
 				4E6695D12BC3B7B900515E68 /* ChatViewController.swift in Sources */,
 				4E6695D92BC3D3B900515E68 /* AddNoteViewController.swift in Sources */,
+				4EA4FDE42BCCB984000A9A92 /* Message.swift in Sources */,
 				4E6695B82BC36A9800515E68 /* SceneDelegate.swift in Sources */,
 				4E6695EB2BC7D2D400515E68 /* YouTubePlayerViewController.swift in Sources */,
 			);
