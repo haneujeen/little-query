@@ -14,13 +14,6 @@ class GoogleScholarTableViewController: UITableViewController {
     var hasSearched = false
     var page = 0 {
         didSet {
-            // If query is nil but page has been updated (search bar triggered)
-            if query == nil {
-                query = searchBar.text
-            }
-            // If query has value (has been sent from main)
-            // else { continue }
-            
             createTask(query: query, page: page, size: 10)
         }
     }
@@ -42,7 +35,6 @@ class GoogleScholarTableViewController: UITableViewController {
         guard !isFetching, let query else { return }
         let request = buildRequest(query: query, page: page * size, size: size)
         
-        self.query = nil
         isFetching = true
         URLSession.shared.dataTask(with: request) { [weak self] data, response, error in
             defer { self?.isFetching = false }
@@ -51,7 +43,7 @@ class GoogleScholarTableViewController: UITableViewController {
             guard let data else { return }
 
             do {
-                let root = try JSONDecoder().decode(Root.self, from: data)
+                let root = try JSONDecoder().decode(ScholarRoot.self, from: data)
                 let newArticles = root.results
                 
                 if page == 0 {
@@ -133,6 +125,7 @@ extension GoogleScholarTableViewController: UISearchBarDelegate {
         hasSearched = true
         isFetching = false
         page = 0
+        self.query = searchBar.text
         searchBar.resignFirstResponder()
     }
 }

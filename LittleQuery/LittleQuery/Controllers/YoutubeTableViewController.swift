@@ -11,13 +11,12 @@ import Kingfisher
 
 class YouTubeTableViewController: UITableViewController {
     var videos: [Video]?
-    
+    var query: String?
     var isFetching = false
     var hasSearched = false
-    var nextPageToken: String?
+    var pageToken: String?
     var scrollCount = 0 {
         didSet {
-            guard let query = searchBar.text else { return }
             search(query: query)
         }
     }
@@ -40,7 +39,7 @@ class YouTubeTableViewController: UITableViewController {
             "key": apiKey
         ]
         
-        if let nextPageToken { params.updateValue(nextPageToken, forKey: "pageToken") }
+        if let pageToken { params.updateValue(pageToken, forKey: "pageToken") }
         
         let alamo = AF.request(endpoint, method: .get, parameters: params)
         
@@ -57,7 +56,7 @@ class YouTubeTableViewController: UITableViewController {
                 }
                 
                 self?.tableView.reloadData()
-                self?.nextPageToken = root.nextPageToken
+                self?.pageToken = root.nextPageToken
                 
             case .failure(let error):
                 print(error.localizedDescription)
@@ -77,7 +76,7 @@ class YouTubeTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return videos?.count ?? 0
+        return (videos?.count ?? 1) - 1
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -131,6 +130,7 @@ extension YouTubeTableViewController: UISearchBarDelegate {
         isFetching = false
         hasSearched = true
         scrollCount = 0
+        self.query = searchBar.text
         searchBar.resignFirstResponder()
     }
 }

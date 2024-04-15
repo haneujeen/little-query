@@ -49,7 +49,7 @@ struct Pagination: Codable {
     let current: Int
 }
 
-struct Root: Codable {
+struct ScholarRoot: Codable {
     let results: [Article]
     let pagination: Pagination
     
