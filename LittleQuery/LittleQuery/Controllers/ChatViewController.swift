@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class ChatViewController: UIViewController {
     var apiKey = AppConfig.apiKeyChat
@@ -26,6 +27,33 @@ class ChatViewController: UIViewController {
         tableView.estimatedRowHeight = 44
     }
     
+    func sendMessage() {
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer \(apiKey)",
+            "Content-Type": "application/json"
+        ]
+        
+        let params: Parameters = [
+            "model": "gpt-3.5-turbo",
+            "messages": messages.map { ["role": $0.role, "content": $0.content] }
+        ]
+        
+        AF.request(
+            "https://api.openai.com/v1/chat/completions",
+            method: .post,
+            parameters: params,
+            encoding: JSONEncoding.default,
+            headers: headers
+        ).responseDecodable(of: ChatRoot.self) { response in
+            switch response.result {
+            case .success(let root):
+                guard let content = root.choices.first?.message.content else { return }
+                self.messages.append(Message(role: "assistant", content: content))
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
     
     @IBAction func sendButtonTapped(_ sender: Any) {
         if let text = textView.text, !text.isEmpty {
