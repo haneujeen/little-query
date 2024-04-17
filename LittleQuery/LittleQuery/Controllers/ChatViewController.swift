@@ -25,6 +25,8 @@ class ChatViewController: UIViewController {
         // Do any additional setup after loading the view.
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 44
+        tableView.delegate = self
+        tableView.dataSource = self
     }
     
     func sendMessage() {
@@ -49,6 +51,13 @@ class ChatViewController: UIViewController {
             case .success(let root):
                 guard let content = root.choices.first?.message.content else { return }
                 self.messages.append(Message(role: "assistant", content: content))
+                self.tableView.reloadData()
+                
+                let lastRowIndex = self.tableView.numberOfRows(inSection: 0) - 1
+                if lastRowIndex >= 0 {
+                    let lastIndexPath = IndexPath(row: lastRowIndex, section: 0)
+                    self.tableView.scrollToRow(at: lastIndexPath, at: .bottom, animated: true)
+                }
             case .failure(let error):
                 print(error.localizedDescription)
             }
@@ -58,9 +67,14 @@ class ChatViewController: UIViewController {
     @IBAction func sendButtonTapped(_ sender: Any) {
         if let text = textView.text, !text.isEmpty {
             messages.append(Message(role: "user", content: text))
-            //tableView.reloadData()
+            tableView.reloadData()
             textView.text = ""
-            //tableView.scrollToRow(at: IndexPath(row: messages.count - 1, section: 0), at: .bottom, animated: true)
+            messageCount += 2
+            let lastRowIndex = self.tableView.numberOfRows(inSection: 0) - 1
+            if lastRowIndex >= 0 {
+                let lastIndexPath = IndexPath(row: lastRowIndex, section: 0)
+                tableView.scrollToRow(at: lastIndexPath, at: .bottom, animated: true)
+            }
         }
     }
 }
@@ -71,11 +85,11 @@ extension ChatViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let identifier = messages[indexPath.row].role == "user" ? "messageSent" : "messageReceived"
+        let identifier: String = messages[indexPath.row + 1].role == "user" ? "messageSent" : "messageReceived"
         let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath)
     
         let label = cell.viewWithTag(100) as? UILabel
-        label?.text = messages[indexPath.row].content
+        label?.text = messages[indexPath.row + 1].content
         
         return cell
     }
