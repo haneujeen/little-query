@@ -8,7 +8,7 @@
 import UIKit
 
 class GoogleScholarTableViewController: UITableViewController {
-    let apiKey = "3e0d360330ffda3410e04ebabbdcae1068124e880e5fcbb3b2c75ba385d4e0e7"
+    let apiKey = AppConfig.apiKeyGoogleScholar
     var query: String?
     var isFetching = false
     var hasSearched = false

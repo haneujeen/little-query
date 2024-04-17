@@ -10,6 +10,7 @@ import Alamofire
 import Kingfisher
 
 class YouTubeTableViewController: UITableViewController {
+    let apiKey = AppConfig.apiKeyYoutubeData
     var videos: [Video]?
     var query: String?
     var isFetching = false

@@ -7,12 +7,12 @@ import Alamofire
 
 class MainViewController: UIViewController {
     // For initial data display
-    var engines = ["Google Scholar", "YouTube", "ChatGPT"]
     var articles: [Article]?
-    let SerpApiKey
+    let apiKeyGoogleScholar = AppConfig.apiKeyGoogleScholar
     var videos: [Video]?
     var pageToken: String?
-    let YTApiKey
+    let apiKeyYoutubeData = AppConfig.apiKeyYoutubeData
+    let apiKeyChat = AppConfig.apiKeyChat
     
     // For search bar
     var searchDebounceTimer: Timer?
@@ -49,7 +49,6 @@ class MainViewController: UIViewController {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
         if segue.identifier == "toGoogleScholar" {
-            
             guard let articles = GSMiniTableManager.articles,
                   let destination = segue.destination as? GoogleScholarTableViewController
             else { return }
@@ -104,7 +103,7 @@ extension MainViewController: UISearchBarDelegate {
         
         // MARK: -
         let googleScholarEndpoint = "https://serpapi.com/search?engine=google_scholar"
-        let googleScholarParams: Parameters = ["q": query, "start": 0, "num": 10, "api_key": SerpApiKey]
+        let googleScholarParams: Parameters = ["q": query, "start": 0, "num": 8, "api_key": apiKeyGoogleScholar]
         
         group.enter()
         AF.request(googleScholarEndpoint, parameters: googleScholarParams).responseDecodable(of: ScholarRoot.self) { [weak self] response in
@@ -123,7 +122,7 @@ extension MainViewController: UISearchBarDelegate {
         let youtubeEndpoint = "https://www.googleapis.com/youtube/v3/search"
         let youtubeParams: Parameters = [
             "part": "snippet", "q": query, "maxResults": 7,
-            "topicId": "/m/01k8wb", "type": "video", "videoCategoryId": 28, "key": YTApiKey
+            "topicId": "/m/01k8wb", "type": "video", "videoCategoryId": 28, "key": apiKeyYoutubeData
         ]
         
         group.enter()
@@ -143,7 +142,7 @@ extension MainViewController: UISearchBarDelegate {
         // MARK: -
         let chatEndpoint = "https://api.openai.com/v1/chat/completions"
         let chatHeaders: HTTPHeaders = [
-            "Authorization": "Bearer ",
+            "Authorization": "Bearer \(apiKeyChat)",
             "Content-Type": "application/json"
         ]
         

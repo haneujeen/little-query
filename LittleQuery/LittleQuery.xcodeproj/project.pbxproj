@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4E03290C2BCF67FD00B66A72 /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E03290B2BCF67FD00B66A72 /* AppConfig.swift */; };
 		4E6695B62BC36A9800515E68 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6695B52BC36A9800515E68 /* AppDelegate.swift */; };
 		4E6695B82BC36A9800515E68 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6695B72BC36A9800515E68 /* SceneDelegate.swift */; };
 		4E6695BD2BC36A9800515E68 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 4E6695BC2BC36A9800515E68 /* Base */; };
@@ -32,6 +33,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4E03290B2BCF67FD00B66A72 /* AppConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
 		4E6695B22BC36A9800515E68 /* LittleQuery.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LittleQuery.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E6695B52BC36A9800515E68 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4E6695B72BC36A9800515E68 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -96,6 +98,7 @@
 				4E6695BE2BC36A9A00515E68 /* Assets.xcassets */,
 				4E6695C02BC36A9A00515E68 /* LaunchScreen.storyboard */,
 				4E6695C32BC36A9A00515E68 /* Info.plist */,
+				4E03290B2BCF67FD00B66A72 /* AppConfig.swift */,
 			);
 			path = LittleQuery;
 			sourceTree = "<group>";
@@ -210,6 +213,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4E6695DC2BC4C39600515E68 /* Article.swift in Sources */,
+				4E03290C2BCF67FD00B66A72 /* AppConfig.swift in Sources */,
 				4E6695DE2BC51EB400515E68 /* Video.swift in Sources */,
 				4E6695D52BC3CA5E00515E68 /* HistoryTableViewController.swift in Sources */,
 				4E6695CF2BC3B77700515E68 /* YouTubeTableViewController.swift in Sources */,

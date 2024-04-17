@@ -8,6 +8,7 @@
 import UIKit
 
 class ChatViewController: UIViewController {
+    var apiKey = AppConfig.apiKeyChat
     var messages: [Message] = [Message(role: "system", content: "You are a biology research assistant. Please provide concise responses, between 1 to 3 sentences.")]
     var messageCount = 0 {
         didSet {
